@@ -21,4 +21,6 @@ Route::get('/', function () {
 
 Route::controller(App\Http\Controllers\Datatable::class)->group(function() {
 	Route::get('/', 'index');
+	Route::get('/datatable/clientside', 'clientside');
+	Route::get('/datatable/serverside', 'serverside');
 });
