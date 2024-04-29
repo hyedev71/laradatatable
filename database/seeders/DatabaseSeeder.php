@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use App\Models\Staff;
 use App\Models\Position;
 use App\Models\Office;
+use Faker\Factory as Faker;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -57,5 +59,20 @@ class DatabaseSeeder extends Seeder
 		Office::create(["office_name" => "Sidney", "office_desc" => "test data..."]);
 		Office::create(["office_name" => "Singapore", "office_desc" => "test data..."]);
 		Office::create(["office_name" => "Tokyo", "office_desc" => "test data..."]);
+
+		$faker = Faker::create();
+
+		for ($i = 0; $i < 100; $i++) {
+			DB::table('staff')->insert([
+				'fullname' => $faker->name(),
+				'position' => Position::all()->random()->position_name,
+				'office' => Office::all()->random()->office_name,
+				'age' => $faker->numberBetween(18, 40),
+				'start_date' => fake()->dateTimeBetween('-2 year', '-1 year'),
+				'salary' => $faker->numberBetween(1800, 5000),
+				'created_at' => now(),
+				'updated_at' => now(),
+			]);		
+		}
     }
 }
