@@ -13,14 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+	return view('datatable.index');
 });
- */
 
-Route::controller(App\Http\Controllers\Datatable::class)->group(function() {
-	Route::get('/', 'index');
-	Route::get('/datatable/clientside', 'clientside');
-	Route::get('/datatable/serverside', 'serverside');
+Route::controller(App\Http\Controllers\ClientSide::class)->group(function() {
+	Route::get('/datatable/clientside', 'index');
+});
+
+Route::controller(App\Http\Controllers\ServerSide::class)->group(function() {
+	Route::get('/datatable/serverside', 'index');
+	Route::get('/datatable/serverside/get/data', 'getData');
 });
